@@ -46,7 +46,10 @@ build/
 *.class
 
 # Log file
+/logs/
 *.log
+/logs/*.txt
+*.txt
 
 # BlueJ files
 *.ctxt
