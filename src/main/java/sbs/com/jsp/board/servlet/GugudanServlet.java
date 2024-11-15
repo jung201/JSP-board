@@ -24,5 +24,6 @@ public class GugudanServlet extends HttpServlet {
             rq.writer(("<div>%d * %d = %d</div>".formatted(dan, i, dan * i)));
         }
 
+
     }
 }

@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 public class Rq {
-    private final HttpServletRequest request;
-    private final HttpServletResponse response;
+    private final HttpServletRequest request; // 클라이언트가 보낸 요청 정보를 담고 있는 객체
+    private final HttpServletResponse response; // 서버가 클라이언트에게 보낼 응답 정보를 담고 있는 객체
 
     public Rq(HttpServletRequest request, HttpServletResponse response) {
         this.request = request;
