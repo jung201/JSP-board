@@ -1,5 +1,6 @@
 package sbs.com.jsp.board.servlet;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -18,11 +19,13 @@ public class GugudanServlet extends HttpServlet {
         int dan = rq.getIntParam("dan", 9);
         int limit = rq.getIntParam("limit", 9);
 
-        rq.writer("<h1>%d단</h1>".formatted(dan));
-
-        for (int i = 1; i <= limit; i++) {
-            rq.writer(("<div>%d * %d = %d</div>".formatted(dan, i, dan * i)));
-        }
+        request.setAttribute("dan", dan);
+        request.setAttribute("limit", limit);
+        
+        // gbgbdan2.jsp에게 나머지 작업 토스
+        // 왜냐하면 나중에 gugudan2.jsp에서 해당 내용을 꺼내 쓸 수 있다.
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/gugudan2.jsp");
+        requestDispatcher.forward(request, response);
 
 
     }
