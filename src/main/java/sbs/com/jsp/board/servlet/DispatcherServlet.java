@@ -18,17 +18,30 @@ public class DispatcherServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Rq rq = new Rq(req, resp);
 
+
         MemberController memberController = Container.memberController;
         ArticleController articleController = Container.articleController;
 
-        // getRequestURI
-        // http://localhost:8080/use/article/list
-        // /usr/article/list 부분만 가져온다
-        String url = req.getRequestURI();
+        switch (rq.getMethod()) {
+            case "GET" -> {
+                switch (rq.getUrlPath()) {
+                    case "/usr/article/list" -> articleController.showList(rq);
+                    case "/usr/article/write" -> articleController.showwrite(rq);
+                    case "/usr/member/join" -> memberController.showjoin(rq);
+                }
+            }
 
-        switch (url) {
-            case "/usr/article/list" -> articleController.showList(rq);
-            case "/usr/member/join" -> memberController.showjoin(rq);
+            case "POST" -> {
+                switch (rq.getUrlPath()) {
+                    case "/usr/article/write" -> articleController.dowrite(rq);
+                }
+            }
         }
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
     }
 }
